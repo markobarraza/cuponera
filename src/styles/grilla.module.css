@@ -1,0 +1,13 @@
+.contenedor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 80%;
+    /* max-width: 1280px; */
+    background-color: red;
+    height: 100%;
+    margin-left: 20%;
+    padding: 20px 0;
+}
