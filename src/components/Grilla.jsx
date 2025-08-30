@@ -5,6 +5,7 @@ const Grilla = () => {
   return (
     <div className= {style.contenedor} >
       <Cupon/>
+      {/* <Cupon/>
       <Cupon/>
       <Cupon/>
       <Cupon/>
@@ -14,8 +15,7 @@ const Grilla = () => {
       <Cupon/>
       <Cupon/>
       <Cupon/>
-      <Cupon/>
-      <Cupon/>
+      <Cupon/> */}
     </div>
   )
 }

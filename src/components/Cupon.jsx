@@ -9,10 +9,10 @@ const Cupon = () => {
 
   return (
     <div>
-    {/* {
+    {
       datos.map ((datos)=>(
         
-      <div className={style.contenedor}>
+      <div key={datos.id} className={style.contenedor}>
         <img className={style.img} src={image} alt="" />
         <div className={style.info}>
 
@@ -38,17 +38,17 @@ const Cupon = () => {
 
         <div className={style.divisor}></div>
         <div className={style.contenedorLegal}>
-          <p className={style.textoLegal}>Válido hasta el 04/06/2025 a las 23:59 hras</p>
+          <p className={style.textoLegal}>Válido hasta el {datos.fecha} a las 23:59 hras</p>
         </div>
       
       </div>
 
       ))
-    } */}
+    }
 
 
 
-<div className={style.contenedor}>
+{/* <div className={style.contenedor}>
         <img className={style.img} src={image} alt="" />
         <div className={style.info}>
 
@@ -77,7 +77,7 @@ const Cupon = () => {
           <p className={style.textoLegal}>Válido hasta el 04/06/2025 a las 23:59 hras</p>
         </div>
       
-      </div>
+      </div> */}
 
 
     </div>

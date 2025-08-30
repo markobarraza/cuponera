@@ -4,15 +4,15 @@ import style from '../styles/formulario.module.css'
 
 const Formulario = () => {
 
-    const {capturarDatos, formulario, agregar} = useContext(CuponContext)
-
+    const {capturarDatos, formulario, agregar, datos} = useContext(CuponContext)
+    console.log(datos);
+    
     
     
 
   return (
     <div className={style.contenedor}>
         <div className={style.innerContainer}>
-            
             
             <input 
                 type="text"
@@ -23,7 +23,7 @@ const Formulario = () => {
             />
             <br />
             <input 
-                type="number"
+                type="text"
                 name='dcto'
                 placeholder='descuento'
                 inputMode='numeric'
@@ -39,6 +39,23 @@ const Formulario = () => {
                 value={formulario.llamado}
                 onChange={capturarDatos}
             />
+            <br />
+            <input 
+                type="text"
+                name='fecha'
+                placeholder='dd/mm/aaaa'
+                value={formulario.fecha || ""}
+                onChange={capturarDatos}
+                pattern="\d{2}/\d{2}/\d{4}"
+            />
+            <br />
+            <input 
+                type="text"
+                name='url'
+                placeholder='URL'
+                value={formulario.url}
+                onChange={capturarDatos}
+             />
 
 
 
