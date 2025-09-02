@@ -13,9 +13,8 @@ const Grilla = () => {
       <Cupon/>
       <Cupon/>
       <Cupon/>
-      <Cupon/>
-      <Cupon/>
       <Cupon/> */}
+      
     </div>
   )
 }

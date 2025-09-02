@@ -1,19 +1,23 @@
 import React, { useContext } from 'react'
 import style from '../styles/cupon.module.css'
-import image from '../assets/profile-img.jpg'
+// import image from '../assets/profile-img.jpg'
 import { CuponContext } from '../context/CuponContext'
 
 const Cupon = () => {
 
-  const{formulario, datos} = useContext(CuponContext)
+  const{formulario, datos, image} = useContext(CuponContext)
+
+  
 
   return (
-    <div>
+    <>
     {
       datos.map ((datos)=>(
         
-      <div key={datos.id} className={style.contenedor}>
-        <img className={style.img} src={image} alt="" />
+      <div key={datos.id} className={style.contenedorCupon}>
+        <div className={style.contenedorImage}>
+          <img className={style.img} src={datos.image} alt="" />
+        </div>
         <div className={style.info}>
 
           <div className={style.contendorCupon}>
@@ -45,6 +49,7 @@ const Cupon = () => {
 
       ))
     }
+    
 
 
 
@@ -80,8 +85,8 @@ const Cupon = () => {
       </div> */}
 
 
-    </div>
     
+    </>
   )
 }
 

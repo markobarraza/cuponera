@@ -1,126 +1,133 @@
-.contenedor {
-  background-color: #D9D9D9;
-  display: flex;
-  /* align-items: center; */
-  justify-content: center;
-  padding: 10px;
-  max-width: 100%;
-  & .img {
-    width: 200px;
-    max-width: 100%;
-  }
-  & .info {
-    padding: 0 10px 0 40px;
-    max-width: 100%;
-    width: 250px;
-    text-align: center;
+
+.contenedorCupon {
+    background-color: #D9D9D9;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 200px;
-    max-height: 100%;
-    & .contendorCupon{
-        
-        & .texto{
-            text-transform: uppercase;
-            font-size: 12px;
-            margin: 0 0 3px 0;
-            font-weight: 700;
-        }
-        & .cupon{
-            background-color: #000000;
-            color: #ffffff;
-            text-align: center;
-            border-radius: 3px;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 2px 0;
-            text-transform: uppercase;
-            letter-spacing: .5px;
+    /* align-items: center; */
+    justify-content: center;
+    padding: 10px;
+    max-width: 100%;
+    & .contenedorImage{
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        background-color: #ffffff;
+            & .img {
+            height: 200px;
+            max-width: 100%;
         }
     }
-    & .contendorllamado{
-        & .contenedorDcto{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 60px;
-            & .porcentaje{
-                font-size: 70px;
+    & .info {
+        padding: 0 10px 0 40px;
+        max-width: 100%;
+        width: 250px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 200px;
+        max-height: 100%;
+        & .contendorCupon{
+            
+            & .texto{
+                text-transform: uppercase;
+                font-size: 12px;
+                margin: 0 0 3px 0;
+                font-weight: 700;
+            }
+            & .cupon{
+                background-color: #000000;
+                color: #ffffff;
+                text-align: center;
+                border-radius: 3px;
+                width: 100%;
+                font-size: 18px;
                 font-weight: bold;
-            }
-            & .innerContenedor{
-                margin-left: 5px;
-                & .textPorcentaje{
-                    font-size: 27px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    height: 34px;
-                }
-                & .adicional{
-                    font-size: 14px;
-                    text-transform: uppercase;
-                    letter-spacing: 3.4px;
-                    font-weight: bold;
-                }
+                padding: 2px 0;
+                text-transform: uppercase;
+                letter-spacing: .5px;
             }
         }
-        & .llamado{
-        font-size: 15px;
+        & .contendorllamado{
+            & .contenedorDcto{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 60px;
+                & .porcentaje{
+                    font-size: 70px;
+                    font-weight: bold;
+                }
+                & .innerContenedor{
+                    margin-left: 5px;
+                    & .textPorcentaje{
+                        font-size: 27px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        height: 34px;
+                    }
+                    & .adicional{
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        letter-spacing: 3.4px;
+                        font-weight: bold;
+                    }
+                }
+            }
+            & .llamado{
+            font-size: 15px;
+            }
+            & .pSeleccionados{
+                font-size: 10px;
+            }
         }
-        & .pSeleccionados{
-            font-size: 10px;
+        
+        & .verProductos{
+            font-size: 12px;
+            text-decoration: underline;
+        }
+    }
+    & .divisor{
+        width: 50px;
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #ffffff; /* mismo color que el fondo */
+            border-radius: 50%;
+            z-index: 1;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #ffffff; /* mismo color que el fondo */
+            border-radius: 50%;
+            z-index: 1;
+        }
+    }
+    & .contenedorLegal{
+        position: relative;
+        padding: 0 5px;
+        & .textoLegal{
+            display: inline-block;
+            transform: rotate(270deg);
+            transform-origin: left center;
+            font-size: 9px;
+            position: absolute;
+            width: 200px;
+            left: 0;
+            top: 190px;
+            margin-left: 5px;
         }
     }
     
-    & .verProductos{
-        font-size: 12px;
-        text-decoration: underline;
     }
-  }
-  & .divisor{
-    width: 50px;
-    position: relative;
-    &::before{
-        content: '';
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 30px;
-        background: #ffffff; /* mismo color que el fondo */
-        border-radius: 50%;
-        z-index: 1;
-    }
-    &::after{
-        content: '';
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 30px;
-        background: #ffffff; /* mismo color que el fondo */
-        border-radius: 50%;
-        z-index: 1;
-    }
-  }
-  & .contenedorLegal{
-    position: relative;
-    padding: 0 5px;
-    & .textoLegal{
-        display: inline-block;
-        transform: rotate(270deg);
-        transform-origin: left center;
-        font-size: 9px;
-        position: absolute;
-        width: 200px;
-        left: 0;
-        top: 190px;
-        margin-left: 5px;
-    }
-  }
-  
-}
