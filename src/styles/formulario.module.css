@@ -2,7 +2,8 @@
     max-width: 400px;
     width: 100%;
     height: 100vh;
-    background-color: #eeeeee;
+    background-color: #f6f8fa;
+    border-right: #e3e8ed 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,6 +33,17 @@
         & .inputDivide{
             display: flex;
             gap: 10px;
+        }
+        & .inputFecha{
+            display: flex;
+            gap: 5px;
+        }
+        & .inputButton{
+            margin-top: 20px;
+            border: #ced4da 1px solid;
+            &:hover{
+                background-color: #eaedf0;
+            }
         }
         & input{
             width: 100%;

@@ -4,8 +4,9 @@ import style from '../styles/formulario.module.css'
 
 const Formulario = () => {
 
-    const {capturarDatos, formulario, agregar, datos} = useContext(CuponContext)
+    const {eliminarCupon, capturarDatos, formulario, agregar, datos} = useContext(CuponContext)
     console.log(datos);
+    console.log(eliminarCupon);
 
   return (
     <div className={style.contenedor}>
@@ -26,7 +27,7 @@ const Formulario = () => {
                 <input 
                     type="text"
                     name='image'
-                    placeholder='URL'
+                    placeholder='URL de una imagen'
                     value={formulario.image}
                     onChange={capturarDatos}
                     required= {formulario.sku === "" && formulario.image === "" ? true : false}
@@ -69,17 +70,42 @@ const Formulario = () => {
                 />
                 
                 
-                <br />
-                <br />
-                <input 
-                    type="text"
-                    name='fecha'
-                    placeholder='Fecha vencimiento: 10/8/2025'
-                    value={formulario.fecha || ""}
-                    onChange={capturarDatos}
-                    pattern="\d{2}/\d{2}/\d{4}"
-                    
-                />
+                <p className={style.tituloInput}>Fecha de vencimiento</p>
+                <div className={style.inputFecha}>
+                    <input 
+                        type="text"
+                        name='dia'
+                        placeholder='día'
+                        min='1'
+                        max='31' 
+                        maxLength={2}
+                        value={formulario.dia}
+                        onChange={capturarDatos}
+                        style={{ width: "50px" }}
+                    />
+                    <input 
+                        type="text"
+                        name='mes'
+                        placeholder='mes'
+                        min='1'
+                        max='12' 
+                        maxLength={2}
+                        value={formulario.mes}
+                        onChange={capturarDatos}
+                        style={{ width: "50px" }}
+                    />
+                    <input 
+                        type="text"
+                        name='anio'
+                        placeholder='año'
+                        min='1900'
+                        max='2100' 
+                        maxLength={4}
+                        value={formulario.anio}
+                        onChange={capturarDatos}
+                        style={{ width: "70px" }}
+                    />
+                </div>
                 
                 <br />
                 
@@ -95,7 +121,7 @@ const Formulario = () => {
 
 
                 <br />
-                <button type='onSubmit'>agregar</button>
+                <button className={style.inputButton} type='onSubmit'>Agregar cupon</button>
             </form>
 
         </div>
