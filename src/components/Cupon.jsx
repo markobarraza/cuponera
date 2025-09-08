@@ -1,39 +1,34 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import style from '../styles/cupon.module.css'
-// import image from '../assets/profile-img.jpg'
 import { CuponContext } from '../context/CuponContext'
 
-const Cupon = () => {
+const Cupon = ({cupon}) => {
 
-  const{datos, editarCupon, eliminarCupon} = useContext(CuponContext)
-
-  
+  const{editarCupon, eliminarCupon} = useContext(CuponContext)
 
   return (
-    <>
-    {
-      datos.map ((datos)=>(
-      <div key={datos.id} className={style.contenedorPadre}>
+    <>      
+      <div data-cupon="true" key={cupon.id} className={style.contenedorPadre}>
         <div  className={style.contenedorCupon}>
           <div className={style.contenedorImage}>
-            <img className={style.img} src={datos.image} alt="" />
+            <img className={style.img} src={cupon.image} alt="" />
           </div>
           <div className={style.info}>
 
             <div className={style.contendorCupon}>
               <p className={style.texto}>usando el cupon</p>
-              <p className={style.cupon}>{datos.cupon}</p>
+              <p className={style.cupon}>{cupon.cupon}</p>
             </div>
 
             <div className={style.contendorllamado}>
               <div className={style.contenedorDcto}>
-                <p className={style.porcentaje}>{datos.dcto}</p>
+                <p className={style.porcentaje}>{cupon.dcto}</p>
                 <div className={style.innerContenedor}>
                   <p className={style.textPorcentaje}>% dcto</p>
                   <p className={style.adicional}>adicional</p> 
                 </div>
               </div>
-              <p className={style.llamado}>{datos.llamado}</p>
+              <p className={style.llamado}>{cupon.llamado}</p>
               <p className={style.pSeleccionados}>Productos seleccionados</p>
             </div>
             
@@ -42,20 +37,20 @@ const Cupon = () => {
 
           <div className={style.divisor}></div>
           <div className={style.contenedorLegal}>
-            <p className={style.textoLegal}>Válido hasta el {datos.fecha} a las 23:59 hras</p>
+            <p className={style.textoLegal}>Válido hasta el {cupon.fecha} a las 23:59 hras</p>
           </div>
         </div>
         {/* Editor de cupon */}
         <div className={style.editorCupon}>
-          <p onClick={()=>editarCupon(datos.id)} className={style.btnEditor}>Editar</p>
-          <p onClick={()=>eliminarCupon(datos.id)} className={style.btnEditor}>Borrar</p>
+          <p onClick={()=>editarCupon(cupon.id)} className={style.btnEditor}>Editar</p>
+          <p onClick={()=>eliminarCupon(cupon.id)} className={style.btnEditor}>Borrar</p>
         </div>
       </div>  
 
       
 
-      ))
-    }
+      
+    
     
 
 

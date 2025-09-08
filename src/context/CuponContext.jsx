@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { useRef, createContext, useState } from "react";
 
 export const CuponContext = createContext()
 
@@ -19,8 +19,9 @@ const CuponProvider = ({children})=>{
             }
         )
     
-    const [datos, setDatos] = useState([])
-    const [image, setImage] = useState("")
+    const [datos, setDatos] = useState([]);
+    const [image, setImage] = useState("");
+    const [editandoId, setEditandoId] = useState();
 
 
     ////////// Consulta API falabella //////////
@@ -92,8 +93,18 @@ const CuponProvider = ({children})=>{
         const cuponEditando = datos.find(c => c.id === id);
         if (cuponEditando){
             setFormulario({...cuponEditando});
+            setEditandoId(id) //estado que guarda el ID seleccionado (asi se ocupa en formulario con un ternario cuando tiene informacion adentro)
         }
     }
+
+    ////////// Funcion del boton para actualizar el array editado //////////
+    const guardarEdicion = ()=>{
+        setDatos(datos.map(cupon =>
+            cupon.id === formulario.id ? {...formulario} : cupon
+        ));
+        setFormulario({ sku: "", image: "", cupon: "", dcto: "", llamado: "", fecha: "", url: "", dia: "", mes: "", anio: "" })
+        setEditandoId(null)
+    }    
 
     ////////// Funcion para eliminar un cupon //////////
     const eliminarCupon = (id)=>{
@@ -103,8 +114,72 @@ const CuponProvider = ({children})=>{
         // }
     }
 
+
+
+    ////////// Funcion para descargar HTML de la grilla //////////
+    const grillaRef = useRef();
+
+    const descargarHTML = () => {
+        const html = grillaRef.current.innerHTML;
+        const blob = new Blob([html], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "grilla-cupones.html";
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+
+
+    const handleUploadHTML = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const html = event.target.result;
+            // Crea un DOM temporal para parsear el HTML
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = html;
+
+            // Extrae los datos de los cupones (ajusta el selector según tu grilla)
+            const cuponesDivs = tempDiv.querySelectorAll('[data-cupon="true"]');
+
+            const cupones = Array.from(cuponesDivs).map(div => {
+                return {
+                    image: div.querySelector("img")?.src || "",
+                    cupon: div.querySelector("._cupon_1ukwe_39")?.textContent || "",
+                    dcto: div.querySelector("._porcentaje_1ukwe_58")?.textContent || "",
+                    llamado: div.querySelector("._llamado_1ukwe_78")?.textContent || "",
+                    fecha: div.querySelector("._textoLegal_1ukwe_122")?.textContent?.match(/\d{2}\/\d{2}\/\d{4}/)?.[0] || "",
+                    url: "", // Si tienes un campo url, ajusta aquí el selector
+                    id: Date.now() + Math.random()
+                };
+            });
+
+            setDatos(cupones);
+        };
+        reader.readAsText(file);
+    };
+
     return(
-        <CuponContext.Provider value={{capturarDatos, formulario, agregar, datos, image, editarCupon, eliminarCupon}}>
+        <CuponContext.Provider value={
+            {
+                capturarDatos,
+                formulario, 
+                agregar, 
+                datos, 
+                image, 
+                editarCupon, 
+                eliminarCupon, 
+                editandoId, 
+                guardarEdicion,
+                grillaRef,
+                descargarHTML,
+                handleUploadHTML
+            }
+        }>
             {children}
         </CuponContext.Provider>
     )

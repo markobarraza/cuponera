@@ -4,14 +4,14 @@ import style from '../styles/formulario.module.css'
 
 const Formulario = () => {
 
-    const {eliminarCupon, capturarDatos, formulario, agregar, datos} = useContext(CuponContext)
+    const {eliminarCupon, capturarDatos, formulario, agregar, datos, editandoId, guardarEdicion, descargarHTML,handleUploadHTML} = useContext(CuponContext)
     console.log(datos);
     console.log(eliminarCupon);
 
   return (
     <div className={style.contenedor}>
         <div className={style.innerContainer}>
-            <form onSubmit= {e => {e.preventDefault(); agregar();}}>
+            <form onSubmit= {e => {e.preventDefault();  agregar();}}>
                 <p className={style.tituloInput}>Imagen</p>
                 <p className={style.textoInput}>Ingresa un SKU o una url de una imagen</p>
                 
@@ -117,13 +117,19 @@ const Formulario = () => {
                     onChange={capturarDatos}
                     // required
                 />
+                <input type="file" accept=".html" onChange={handleUploadHTML} />
 
 
 
                 <br />
-                <button className={style.inputButton} type='onSubmit'>Agregar cupon</button>
+                {editandoId
+                    ? <button className={style.inputButton} onClick={guardarEdicion} >Editar cupon</button>
+                    : <button className={style.inputButton} type='onSubmit'>Agregar cupon</button>
+                }
+                
+                
             </form>
-
+                <button onClick={descargarHTML}>Descargar grilla HTML</button>
         </div>
     </div>
   )
