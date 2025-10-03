@@ -1,7 +1,13 @@
-#root {
-  --verde: #add500;
-  width: 100%;
-  
+body{
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
 }
 p{
   margin: 0;

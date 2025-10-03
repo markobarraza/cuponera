@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+// import './index.css'
 import CuponProvider from './context/CuponContext.jsx'
 import SwapyProvider from './context/SwapyContext.jsx'
 import FalabellaProvider from './context/FalabellaContext.jsx'
