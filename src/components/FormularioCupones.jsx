@@ -4,9 +4,7 @@ import style from '../styles/formulario.module.css'
 
 const Formulario = () => {
 
-    const {eliminarCupon, capturarDatos, formulario, agregar, datos, editandoId, guardarEdicion, descargarHTML,handleUploadHTML} = useContext(CuponContext)
-    console.log(datos);
-    console.log(eliminarCupon);
+    const {capturarDatos, formulario, agregar, editandoId, guardarEdicion, descargarHTML,handleUploadHTML} = useContext(CuponContext)
 
   return (
     <div className={style.contenedor}>
@@ -68,9 +66,17 @@ const Formulario = () => {
                     onChange={capturarDatos}
                     // required
                 />
+                <input 
+                    type="text"
+                    name='subllamado'
+                    placeholder='Sub-llamado'
+                    value={formulario.subllamado}
+                    onChange={capturarDatos}
+                    // required
+                />
                 
                 
-                <p className={style.tituloInput}>Fecha de vencimiento</p>
+                <p className={style.tituloInput}>Fecha y hora de vencimiento</p>
                 <div className={style.inputFecha}>
                     <input 
                         type="text"
@@ -96,19 +102,26 @@ const Formulario = () => {
                     />
                     <input 
                         type="text"
-                        name='anio'
-                        placeholder='año'
-                        min='1900'
-                        max='2100' 
-                        maxLength={4}
-                        value={formulario.anio}
+                        name='hora'
+                        placeholder='Hora'
+                        value={formulario.hora}
                         onChange={capturarDatos}
                         style={{ width: "70px" }}
                     />
                 </div>
+
+                <p className={style.tituloInput}>Texto legal</p>
+                <input 
+                    type="text"
+                    name='legal'
+                    placeholder='Texto legal'
+                    value={formulario.legal}
+                    onChange={capturarDatos}
+                    // required
+                />
                 
                 <br />
-                
+                <p className={style.tituloInput}>URL Cupon</p>
                 <input 
                     type="text"
                     name='url'
@@ -117,20 +130,19 @@ const Formulario = () => {
                     onChange={capturarDatos}
                     // required
                 />
-                <input type="file" accept=".html" onChange={handleUploadHTML} />
 
-
-
-                <br />
                 {editandoId
                     ? <button className={style.inputButton} onClick={guardarEdicion} >Editar cupon</button>
                     : <button className={style.inputButton} type='onSubmit'>Agregar cupon</button>
                 }
                 
-                
+                <p className={style.tituloInput}>Carga un archivo de cupones</p>
+                <input type="file" accept=".html" onChange={handleUploadHTML} />
             </form>
-                <button onClick={descargarHTML}>Descargar grilla HTML</button>
+                
         </div>
+        
+        <button className={style.btnDescargar} onClick={descargarHTML}>Descargar cupones</button>
     </div>
   )
 }

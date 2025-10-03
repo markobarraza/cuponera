@@ -1,0 +1,272 @@
+
+.Contador_contenedorPadre{
+    position: relative;
+    @media(max-width: 768px){
+        text-align: center;
+    }
+    & .Contador_contenedorCupon {
+        background-color: #F0F0F1;
+        display: flex;
+        justify-content: space-between;
+        max-width: 100%;
+        color: unset;
+        border: 1px solid #E8E8E8;
+        border-radius: 5px;
+        
+        @media(max-width: 768px){
+            display: inline-block;
+            
+        }
+        & .Contador_contenedorImage{
+            width: 255px;
+            height: 255px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #F0F0F1;
+            @media(max-width: 768px){
+                margin: 0 auto;
+                height: 220px;
+            }
+                & .Contador_img {
+                height: 200px;
+                max-width: 100%;
+                mix-blend-mode: multiply
+            }
+        }
+        
+        & .Contador_info {
+            padding: 20px 20px 0 10px;
+            max-width: 100%;
+            width: 270px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            @media(max-width: 768px){
+                padding: 0;
+            }
+            & .Contador_innerInfo{
+                height: 100%;
+                @media(max-width: 768px){
+                    margin: 0 15px;
+                }
+                & .Contador_contendorCupon{
+                    text-align: left;
+                    & .Contador_texto{
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        margin: 0;
+                    }
+                    & .Contador_descripcion{
+                        font-weight: 700;
+                        font-size: 25px;
+                        line-height: 28px;
+                        margin: 0;
+                        color: #000000;
+                    }  
+                    & .Contador_subDescripcion{
+                        font-size: 12px;
+                        margin: 0;
+                    }  
+                        
+                }
+                
+            }
+            & .Contador_contendorllamado{
+                display: inline-block;
+                margin: 10px 0; 
+                text-decoration: none;
+                @media(max-width: 768px){
+                    height: 130px;
+                }
+
+                /* PRECIO OU */
+                & .contenedorRelativoPrecio{
+                    height: 60px;
+                    width: 180px;
+                    & .Contador_contenedorNumerosPrecio{
+                        font-size: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: start;
+                        z-index: 2;
+                        height: 60px;
+                        color: #000000;
+                        & .imgOU_precio{
+                            width: 50px;
+                            max-width: 100%;
+                        }
+                        & .Contador_precioOferta{
+                        font-size: 2em;
+                        line-height: 1em;
+                        font-weight: bold;
+                        margin: 0;
+                        }
+                        & .Contador_precioOU{
+                            background-color: #00FF00;
+                        }
+                        & .Contador_contenedor2xPrecio{
+                            display: flex;
+                            gap: 10px;
+                            & .Contador_texto2x{
+                                font-size: 2em;
+                                line-height: 1em;
+                                font-weight: bold;
+                                margin: 0;
+                            }
+                            & .Contador_precio2x{
+                                font-size: 2em;
+                                line-height: 1em;
+                                font-weight: bold;
+                                margin: 0;
+                            }
+                            & .Contador_precioOU2x{
+                                background-color: #00FF00;
+                            }
+
+                        }
+                        & .Contador_TextoprecioOferta{
+                            font-size: .8em;
+                            font-weight: 400;
+                            text-align: left;
+                            margin: 0;
+
+                        }
+                    }
+                    
+                }
+
+                /* DESUENTO */
+                & .contenedorRelativo{
+                    position: relative;
+                    height: 60px;
+                    width: 180px;
+                
+                    & .fondoVerdeDCTO{
+                        position: absolute;
+                        z-index: 1;
+                        left: 20px;
+                        width: 100%;
+                        height: 90%;
+                        background: #00FF00;
+                        margin-top: 10px;
+                    }
+                    & .Contador_contenedorNumeros{
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                        position: absolute;
+                        z-index: 2;
+                        height: 60px;
+                        & .imgOU{
+                            width: 25px;
+                            max-width: 100%;
+                        }
+                        & .Contador_porcentaje{
+                        font-size: 6em;
+                        letter-spacing: -5px;
+                        font-weight: bold;
+                        margin: 0;
+                        color: #000000;
+                        }
+                        & .Contador_innerContenedor{
+                            margin-left: 5px;
+                            margin-top: 10px;
+                            text-align: left;
+                            & .Contador_textPorcentaje{
+                                font-size: 3.5em;
+                                line-height: .6em;
+                                font-weight: bold;
+                                text-transform: uppercase;
+                                margin-bottom: 0;
+                                color: #000000;
+                            }
+                            & .Contador_adicional{
+                                font-size: 1.5em;
+                                letter-spacing: 1px;
+                                font-weight: bold;
+                                margin: 0;
+                                color: #000000;
+                            }
+                        }
+                    }
+                    
+                }
+                & .Contador_pSeleccionados{
+                    font-size: .8em;
+                    margin: 10px 0 0 0;
+                    text-align: center;
+                    color: #000000;
+                }
+                & .Contador_verProductos{
+                    font-size: 12px;
+                    text-decoration: underline;
+                    margin: 0;
+                }
+            }
+            
+                
+            }
+            & .Contador_contenedorLegal{
+            position: relative;
+            padding: 0 5px;
+            @media(max-width: 768px){
+                position: initial;
+            }
+            & .Contador_textoLegal{
+                display: inline-block;
+                font-size: 9px;
+                text-align: center;
+                line-height: 12px;
+                margin: 0;
+                @media(max-width: 768px){
+                    position: initial;
+                    transform: none;
+                    left: 0;
+                    top: 0;
+                    text-align: center;
+                }
+            }
+        }
+        }
+    }
+    
+    & .panel.panel--open {
+        display: block;
+    }
+    & .Contador_editorCupon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 0px;
+        z-index: 100;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+        background-color: #5b5b5b4c;
+        
+        &:hover{
+            opacity: 1;
+            pointer-events: auto;
+        }
+        & .Contador_btnEditor{
+            background-color: white;
+            color: black;
+            border-radius: 100%;
+            font-size: 22px;
+            padding: 20px 22px;
+            cursor: pointer;
+            
+            &:hover{
+                background-color: black;
+                color: white;
+            }
+        }
+    }
+}

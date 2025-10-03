@@ -1,57 +1,43 @@
-import { useRef, createContext, useState } from "react";
+import { useRef, createContext, useState, useContext } from "react";
+import { FalabellaContext } from "./FalabellaContext";
+
 
 export const CuponContext = createContext()
 
 const CuponProvider = ({children})=>{
 
+    const {image, getInformacion} = useContext(FalabellaContext)
+
     // Estado que guarda la info que se escribe en los input
     const [formulario, setFormulario] = useState(
             {
                 sku: "",
+                image: "",
                 cupon: "",
                 dcto: "",
                 llamado: "",
-                fecha: "",
+                subllamado: "",
                 url: "",
                 dia: "",
                 mes: "",
-                anio: "",
+                hora: "",
+                legal: "",
             }
         )
     
     const [datos, setDatos] = useState([]);
-    const [image, setImage] = useState("");
+    
     const [editandoId, setEditandoId] = useState();
 
 
-    ////////// Consulta API falabella //////////
-    const getInformacion = async (skuId) => {
-        const jsonParam = JSON.stringify({
-            products: [{ skuId }]
-        });
-    
-        const encodedParam = encodeURIComponent(jsonParam);
 
-        const url = `https://www.falabella.com/s/browse/v1/fetchItemDetails/cl?${encodedParam}`;
-
-        try {
-            const respuesta = await fetch(url);
-            const data = await respuesta.json();
-            const imageUrl = data.products[0].product.mediaUrls[0];
-            setImage(imageUrl);
-            return imageUrl; // <-- retorna la url
-        } catch (error) {
-            console.error('Error al obtener datos:', error);
-            return ""; // retorna vacío si hay error
-        }
-    };
 
 
 
     ////////// Funcion que captura los datos escritos en los inputs //////////
     const capturarDatos = (e)=>{
         // opciones para dcto y fecha
-        if (e.target.name === "dcto" || e.target.name === "fecha" || e.target.name === "dia" || e.target.name === "mes" || e.target.name === "anio") {
+        if (e.target.name === "dcto" || e.target.name === "fecha" || e.target.name === "dia" || e.target.name === "mes") {
             // Solo permitir números (y vacío para borrar)
             if (/^[\d/]*$/.test(e.target.value)) {
                 setFormulario({
@@ -67,24 +53,34 @@ const CuponProvider = ({children})=>{
         }
     }
     
-    ////////// Funcion que agrega la info del estado de formulario al de datos para crear el array de bjetos //////////
+    ////////// Funcion que agrega la info del estado de formulario al 
+    // de datos para crear el array de bjetos //////////
     const agregar= async()=>{
         let imageUrl = formulario.image; //se guarda en la variable lo que se escribe en input image
         if(!imageUrl && formulario.sku){ //la condicion es: si no hay info en input image y si hay info en input sku
             // Si no hay URL manual, consulta la API por SKU
             imageUrl = await getInformacion(formulario.sku); // espera y recibe la url
         } 
-        const fechaConcatenada = 
-            formulario.dia && formulario.mes && formulario.anio ? `${formulario.dia}/${formulario.mes}/${formulario.anio}` : "";
         const nuevoCupon = {
             ...formulario,
-            fecha: fechaConcatenada,
             id: Date.now(), // ID único basado en la fecha y hora actual
             image: imageUrl || "" // usa la url recibida
         };
         
         setDatos ([...datos, nuevoCupon])
-        setFormulario({ sku: "", image: "", cupon: "", dcto: "", llamado: "", fecha: "", url: "", dia: "", mes: "", anio: "" })
+        setFormulario({ 
+            sku: "",
+            image: "",
+            cupon: "",
+            dcto: "",
+            subllamado: "",
+            llamado: "",
+            url: "",
+            dia: "",
+            mes: "",
+            hora: "" ,
+            legal: ""
+        })
         
     }
 
@@ -102,7 +98,20 @@ const CuponProvider = ({children})=>{
         setDatos(datos.map(cupon =>
             cupon.id === formulario.id ? {...formulario} : cupon
         ));
-        setFormulario({ sku: "", image: "", cupon: "", dcto: "", llamado: "", fecha: "", url: "", dia: "", mes: "", anio: "" })
+        setFormulario({ 
+            sku: "",
+            image: "",
+            cupon: "",
+            dcto: "",
+            subllamado: "",
+            llamado: "",
+            url: "",
+            dia: "",
+            mes: "",
+            hora: "",
+            legal: ""
+        })
+
         setEditandoId(null)
     }    
 
@@ -147,12 +156,29 @@ const CuponProvider = ({children})=>{
             const cuponesDivs = tempDiv.querySelectorAll('[data-cupon="true"]');
 
             const cupones = Array.from(cuponesDivs).map(div => {
+                const textoLegal = div.querySelector(".Cupon_textoLegal")?.textContent || "";
+                // Captura dd/mm/(año ignorado) y hora hh:mm (si existe)
+                // Ej: "Válido hasta el 05/10/2025 a las 23:59 hras."
+                let dia = "", mes = "", hora = "";
+                const m1 = textoLegal.match(/(\d{1,2})\/(\d{1,2})\/\d{4}/);
+                if (m1){
+                    dia = m1[1];
+                    mes = m1[2];
+                }
+                const mHora = textoLegal.match(/(\d{1,2}:\d{2})/);
+                if (mHora){
+                    hora = mHora[1];
+                }
                 return {
                     image: div.querySelector("img")?.src || "",
-                    cupon: div.querySelector("._cupon_1ukwe_39")?.textContent || "",
-                    dcto: div.querySelector("._porcentaje_1ukwe_58")?.textContent || "",
-                    llamado: div.querySelector("._llamado_1ukwe_78")?.textContent || "",
-                    fecha: div.querySelector("._textoLegal_1ukwe_122")?.textContent?.match(/\d{2}\/\d{2}\/\d{4}/)?.[0] || "",
+                    cupon: div.querySelector(".Cupon_cupon")?.textContent || "",
+                    dcto: div.querySelector(".Cupon_porcentaje")?.textContent || "",
+                    llamado: div.querySelector(".Cupon_llamado")?.textContent || "",
+                    subllamado: div.querySelector(".Cupon_subllamado")?.textContent || "",
+                    legal: div.querySelector(".panel")?.textContent || "",
+                    dia,
+                    mes,
+                    hora,
                     url: "", // Si tienes un campo url, ajusta aquí el selector
                     id: Date.now() + Math.random()
                 };

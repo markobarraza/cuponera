@@ -1,0 +1,7 @@
+.mainContainer{
+    display: flex;
+    background-color: #cce3de;
+    height: 100vh;
+    padding: 10px 20px 0 20px;
+    gap: 10px;
+}

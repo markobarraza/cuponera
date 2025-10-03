@@ -1,14 +1,29 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Formulario from './components/Formulario'
-import Home from './components/Home'
+import Contadores from './components/Contadores'
+import Cuponera from './components/Cuponera'
+import NavBar from './components/NavBar'
 
 function App() {
   
 
   return (
     <>
-      <Formulario/>
-      <Home/>
+      
+        <NavBar/>
+        <Routes>
+          <Route
+            path='/'
+            element= {<Cuponera/>}
+          >
+          </Route>
+          <Route
+            path='/contadores'
+            element= {<Contadores/>}
+          >
+          </Route>
+        </Routes>
+      
     </>
   )
 }

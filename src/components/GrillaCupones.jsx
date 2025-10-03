@@ -1,15 +1,22 @@
 import {useContext } from 'react'
 import Cupon from './Cupon'
-import style from '../styles/grilla.module.css'
+import '../styles/grilla.css'
 import { CuponContext } from '../context/CuponContext'
+import { SwapyContext } from '../context/SwapyContext'
 
 const Grilla = () => {
-  const {datos, grillaRef} = useContext(CuponContext)
+  const {datos, agregar} = useContext(CuponContext)
+  const {container} = useContext(SwapyContext)
+  
+  
+
+
   return (
-    <div ref={grillaRef} className={style.contenedor}>
+    <div ref={container} className='Cupon-contenedorGrilla'>
       {datos.map(cupon => (
         <Cupon key={cupon.id} cupon={cupon} />
       ))}
+        
     </div>
   )
 }

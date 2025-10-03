@@ -1,90 +1,94 @@
-import { useContext } from 'react'
-import style from '../styles/cupon.module.css'
+import { useContext, useState } from 'react'
 import { CuponContext } from '../context/CuponContext'
+import { NavLink } from 'react-router-dom'
+import '../styles/cupon.css'
 
 const Cupon = ({cupon}) => {
 
   const{editarCupon, eliminarCupon} = useContext(CuponContext)
+  const [verLegal, setVerLegal] = useState(false)
+
 
   return (
     <>      
-      <div data-cupon="true" key={cupon.id} className={style.contenedorPadre}>
-        <div  className={style.contenedorCupon}>
-          <div className={style.contenedorImage}>
-            <img className={style.img} src={cupon.image} alt="" />
-          </div>
-          <div className={style.info}>
+      <div data-swapy-slot={cupon.id} data-cupon="true" key={cupon.id}>
+        <div data-swapy-item={cupon.id} className='Cupon_contenedorPadre'>
+            <div className='Cupon_contenedorCupon'>
 
-            <div className={style.contendorCupon}>
-              <p className={style.texto}>usando el cupon</p>
-              <p className={style.cupon}>{cupon.cupon}</p>
-            </div>
 
-            <div className={style.contendorllamado}>
-              <div className={style.contenedorDcto}>
-                <p className={style.porcentaje}>{cupon.dcto}</p>
-                <div className={style.innerContenedor}>
-                  <p className={style.textPorcentaje}>% dcto</p>
-                  <p className={style.adicional}>adicional</p> 
-                </div>
+              {/* IMAGEN */}
+              <div className='Cupon_contenedorImage'>
+                <img className='Cupon_img' src={cupon.image} alt="" />
               </div>
-              <p className={style.llamado}>{cupon.llamado}</p>
-              <p className={style.pSeleccionados}>Productos seleccionados</p>
+
+              {/* DIVISOR */}
+              <div className='Cupon_divisor'></div>
+
+              {/* INFO */}
+              <div className='Cupon_info'>
+                <div className='Cupon_innerInfo'>
+                  <div className='Cupon_contendorCupon'>
+                    <p className='Cupon_texto'>usando el cupon</p>
+                    <div className='Cupon_nombreCupon'>
+                      <p className='Cupon_cupon'>{cupon.cupon}</p>
+                      <img className='Cupon_iconCopiar copiarCupon' src="https://images.contentstack.io/v3/assets/blt7c5c2f2f888a7cc3/blt6d1556bf501d9da7/copy-regular-full.png" alt="" />
+                      <div className="Cupon_mensajeCopiado">Copiar cupon</div>
+                    </div>
+                  </div>
+
+                  <NavLink to={cupon.url} className='Cupon_contendorllamado'>
+                  
+                    <div className='Cupon_contenedorDcto'>
+                      <p className='Cupon_porcentaje'>{cupon.dcto}</p>
+                      <div className='Cupon_innerContenedor'>
+                        <p className='Cupon_textPorcentaje'>% dcto</p>
+                        <p className='Cupon_adicional'>adicional</p> 
+                      </div>
+                    </div>
+                    <p className='Cupon_llamado' data-field="llamado" >{cupon.llamado}</p>
+                    <p className='Cupon_subllamado'>{cupon.subllamado}</p>
+                    <p className='Cupon_pSeleccionados'>Productos seleccionados</p>
+                    <p className='Cupon_verProductos'>Ver productos </p>
+                  
+                  </NavLink>
+                  
+                </div>
+
+                <div className='Cupon_contenedorLegal'>
+                  <p className='Cupon_textoLegal'>Válido hasta el {cupon.dia}/{cupon.mes}/2025 a las {cupon.hora}hras. </p>
+                </div>
+
+              </div>
+              
             </div>
             
-            <p className={style.verProductos}>Ver productos </p>
-          </div>
-
-          <div className={style.divisor}></div>
-          <div className={style.contenedorLegal}>
-            <p className={style.textoLegal}>Válido hasta el {cupon.fecha} a las 23:59 hras</p>
-          </div>
-        </div>
-        {/* Editor de cupon */}
-        <div className={style.editorCupon}>
-          <p onClick={()=>editarCupon(cupon.id)} className={style.btnEditor}>Editar</p>
-          <p onClick={()=>eliminarCupon(cupon.id)} className={style.btnEditor}>Borrar</p>
-        </div>
-      </div>  
-
-      
-
-      
-    
-    
-
-
-
-{/* <div className={style.contenedor}>
-        <img className={style.img} src={image} alt="" />
-        <div className={style.info}>
-
-          <div className={style.contendorCupon}>
-            <p className={style.texto}>usando el cupon</p>
-            <p className={style.cupon}>samsung50</p>
-          </div>
-
-          <div className={style.contendorllamado}>
-            <div className={style.contenedorDcto}>
-              <p className={style.porcentaje}>50</p>
-              <div className={style.innerContenedor}>
-                <p className={style.textPorcentaje}>% dcto</p>
-                <p className={style.adicional}>adicional</p> 
+            <div className="Cupon_contenedorTC">
+              <div className='Cupon_VerTC' onClick={()=>setVerLegal(v=>!v)}>
+                  Ver términos y condiciones
               </div>
+              <div className={`panel ${verLegal ? 'panel--open' : ''}`}>{cupon.legal}</div>
             </div>
-            <p className={style.llamado}>En celulares samsumg</p>
-            <p className={style.pSeleccionados}>Productos seleccionados</p>
-          </div>
           
-          <p className={style.verProductos}>Ver productos </p>
-        </div>
+          {/* Editor de cupon */}
+          <div className='Cupon_editorCupon'>
+            <p onClick={()=>editarCupon(cupon.id)} className='Cupon_btnEditor'>
+              <i className="fa-solid fa-pen-to-square"></i>
+            </p>
+            <p onClick={()=>eliminarCupon(cupon.id)} className='Cupon_btnEditor'>
+              <i className="fa-solid fa-trash-can"></i>
+            </p>
+          </div>
+        </div>  
+      </div>
 
-        <div className={style.divisor}></div>
-        <div className={style.contenedorLegal}>
-          <p className={style.textoLegal}>Válido hasta el 04/06/2025 a las 23:59 hras</p>
-        </div>
       
-      </div> */}
+
+      
+    
+    
+
+
+
 
 
     

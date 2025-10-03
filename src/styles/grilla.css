@@ -1,0 +1,13 @@
+.Cupon-contenedorGrilla{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    width: 100%;
+    /* max-width: 1280px; */
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 100%;
+    
+}
