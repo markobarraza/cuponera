@@ -20,6 +20,11 @@ const FormularioContadores = () => {
     
     <div className={style.contenedor}>
             <div className={style.innerContainer}>
+              <div className={style.tituloFormulario}>
+                  <i class={`fa-solid fa-alarm-clock ${style.iconTitulo}`}></i>
+                  <div className={style.lineDivisor}></div>
+                  <h2>Contadores</h2>
+              </div>
                 <form onSubmit= {e => {e.preventDefault();  agregar();}}>
                     <p className={style.tituloInput}>Imagen</p>
                     <p className={style.textoInput}>Ingresa un SKU o una url de una imagen</p>
@@ -59,7 +64,7 @@ const FormularioContadores = () => {
                         <input 
                             type="text"
                             name='descripcion'
-                            placeholder='Descripcion Producto'
+                            placeholder='Descripción Principal'
                             value={formulario.descripcion}
                             onChange={capturarDatos}
                             // required
@@ -67,7 +72,7 @@ const FormularioContadores = () => {
                         <input 
                             type="text"
                             name='subllamado'
-                            placeholder='Descripcion Producto'
+                            placeholder='Descripción secundaria'
                             value={formulario.subllamado}
                             onChange={capturarDatos}
                             // required
@@ -239,7 +244,7 @@ const FormularioContadores = () => {
 
                     {!editandoId && (
                       <button className={style.inputButton} type="submit">
-                        Agregar cupón
+                        Agregar cupón +
                       </button>
                     )}
 
@@ -253,7 +258,7 @@ const FormularioContadores = () => {
                       </button>
                     )}
 
-                    <p className={style.tituloInput}>Carga un archivo de cupones</p>
+                    <p className={style.tituloInput}>Carga un archivo de contadores</p>
                     <input type="file" accept=".html" onChange={handleUploadHTML} />
                 </form>
                     

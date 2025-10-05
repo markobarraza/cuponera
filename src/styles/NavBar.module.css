@@ -3,14 +3,18 @@
     height: 50px;
     background-color: #cee4df;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
+    padding-left: 20px;
     & .btnNav{
+        display: flex;
+        align-items: center;
         background-color: #eaf4f4;
         padding: 8px 20px;
+        height: 60%;
         margin-top: 10px;
-        border-radius: 100px;
+        border-radius: 5px;
         color: #759385;
         font-weight: 700;
         text-transform: uppercase;

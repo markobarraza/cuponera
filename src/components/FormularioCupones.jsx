@@ -9,6 +9,12 @@ const Formulario = () => {
   return (
     <div className={style.contenedor}>
         <div className={style.innerContainer}>
+            <div className={style.tituloFormulario}>
+                <i class={`fa-solid fa-ticket ${style.iconTitulo}`}></i>
+                <div className={style.lineDivisor}></div>
+                <h2>cuponera</h2>
+            </div>
+        
             <form onSubmit= {e => {e.preventDefault();  agregar();}}>
                 <p className={style.tituloInput}>Imagen</p>
                 <p className={style.textoInput}>Ingresa un SKU o una url de una imagen</p>
@@ -133,7 +139,10 @@ const Formulario = () => {
 
                 {editandoId
                     ? <button className={style.inputButton} onClick={guardarEdicion} >Editar cupon</button>
-                    : <button className={style.inputButton} type='onSubmit'>Agregar cupon</button>
+                    : <button className={style.inputButton} type='onSubmit'>
+                        Agregar cupon +
+
+                    </button>
                 }
                 
                 <p className={style.tituloInput}>Carga un archivo de cupones</p>

@@ -11,12 +11,14 @@ function App() {
     <>
       
         <NavBar/>
+
         <Routes>
           <Route
             path='/cuponera'
             element= {<Cuponera/>}
           >
           </Route>
+          
           <Route
             path='/contadores'
             element= {<Contadores/>}
