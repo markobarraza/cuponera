@@ -10,7 +10,7 @@ const Formulario = () => {
     <div className={style.contenedor}>
         <div className={style.innerContainer}>
             <div className={style.tituloFormulario}>
-                <i class={`fa-solid fa-ticket ${style.iconTitulo}`}></i>
+                <i className={`fa-solid fa-ticket ${style.iconTitulo}`}></i>
                 <div className={style.lineDivisor}></div>
                 <h2>cuponera</h2>
             </div>

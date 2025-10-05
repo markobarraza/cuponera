@@ -21,7 +21,7 @@ const FormularioContadores = () => {
     <div className={style.contenedor}>
             <div className={style.innerContainer}>
               <div className={style.tituloFormulario}>
-                  <i class={`fa-solid fa-alarm-clock ${style.iconTitulo}`}></i>
+                  <i className={`fa-solid fa-alarm-clock ${style.iconTitulo}`}></i>
                   <div className={style.lineDivisor}></div>
                   <h2>Contadores</h2>
               </div>

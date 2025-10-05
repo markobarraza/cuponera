@@ -14,11 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <FalabellaProvider>
           <CuponProvider>
-            <SwapyProvider>
               <ContadorProvider>
+            <SwapyProvider>
                 <App />
-              </ContadorProvider>
             </SwapyProvider>
+              </ContadorProvider>
           </CuponProvider>
         </FalabellaProvider>
     </BrowserRouter>

@@ -6,8 +6,8 @@ const CardContador = ({contador}) => {
   const{eliminarContador, editarContador} = useContext(ContadorContext)
 
   return (
-    <div data-contador="true">
-            <div className='Contador_contenedorPadre'>
+    <div data-swapy-slot={contador.id} data-contador="true" key={contador.id}>
+            <div data-swapy-item={contador.id} className='Contador_contenedorPadre'>
                 
                 <div style={contador.precioCheck ?  undefined : {alignItems: 'center'} } className='Contador_contenedorCupon'>
     

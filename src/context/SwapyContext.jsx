@@ -1,6 +1,7 @@
 import { useEffect, useRef, createContext, useContext } from "react"
 import { createSwapy } from 'swapy'
 import { CuponContext } from './CuponContext'
+import { ContadorContext } from "./ContadorContext"
 
 export const SwapyContext = createContext()
 
@@ -9,6 +10,7 @@ const SwapyProvider = ({children})=>{
     const swapy = useRef(null)
     const container = useRef(null)
     const {agregar} = useContext(CuponContext)
+    
 
 
     useEffect(() => {
@@ -29,7 +31,7 @@ const SwapyProvider = ({children})=>{
     }, [agregar])
 
     return(
-        <SwapyContext.Provider value = {{container}}>
+        <SwapyContext.Provider value = {{container, swapy}}>
             {children}
         </SwapyContext.Provider>
     )
