@@ -111,12 +111,12 @@ const Formulario = () => {
                 </div>
 
                 <p className={style.tituloInput}>Texto legal</p>
-                <input 
-                    type="text"
+                <textarea  className= {style.inputLegal}
                     name='legal'
                     placeholder='Texto legal'
                     value={formulario.legal}
                     onChange={capturarDatos}
+                    rows="5"
                     // required
                 />
                 

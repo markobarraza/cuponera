@@ -14,7 +14,7 @@ const CardContador = ({contador}) => {
     
                   {/* IMAGEN */}
                   <div className='Contador_contenedorImage'>
-                    <img className='Contador_img' src={contador.image} alt="" />
+                    <img className='Contador_img' src={contador.image} alt= {`Contador Falabella ${contador.textoAlt}`} title={`Contador Falabella ${contador.textoAlt}`} />
                   </div>
     
                   {/* INFO */}

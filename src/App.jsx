@@ -13,7 +13,7 @@ function App() {
         <NavBar/>
         <Routes>
           <Route
-            path='/'
+            path='/cuponera'
             element= {<Cuponera/>}
           >
           </Route>

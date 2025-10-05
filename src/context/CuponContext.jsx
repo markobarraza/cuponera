@@ -6,7 +6,8 @@ export const CuponContext = createContext()
 
 const CuponProvider = ({children})=>{
 
-    const {image, getInformacion} = useContext(FalabellaContext)
+    const {image, textoAlt, getInformacion} = useContext(FalabellaContext)
+    
 
     // Estado que guarda la info que se escribe en los input
     const [formulario, setFormulario] = useState(
@@ -22,6 +23,7 @@ const CuponProvider = ({children})=>{
                 mes: "",
                 hora: "",
                 legal: "",
+                textoAlt: "",
             }
         )
     
@@ -57,14 +59,19 @@ const CuponProvider = ({children})=>{
     // de datos para crear el array de bjetos //////////
     const agregar= async()=>{
         let imageUrl = formulario.image; //se guarda en la variable lo que se escribe en input image
+        let textoAltValue = "";
+
         if(!imageUrl && formulario.sku){ //la condicion es: si no hay info en input image y si hay info en input sku
+            const { imageUrl: apiImage, textoalt } = await getInformacion(formulario.sku);
             // Si no hay URL manual, consulta la API por SKU
-            imageUrl = await getInformacion(formulario.sku); // espera y recibe la url
+            imageUrl = apiImage; // espera y recibe la url
+            textoAltValue = textoalt || textoAltValue; // usar API si no hay valor manual
         } 
         const nuevoCupon = {
             ...formulario,
             id: Date.now(), // ID único basado en la fecha y hora actual
-            image: imageUrl || "" // usa la url recibida
+            image: imageUrl || "", // usa la url recibida
+            textoAlt: textoAltValue || "" // <-- AGREGAR al objeto
         };
         
         setDatos ([...datos, nuevoCupon])
@@ -79,7 +86,8 @@ const CuponProvider = ({children})=>{
             dia: "",
             mes: "",
             hora: "" ,
-            legal: ""
+            legal: "",
+            textoAlt: "" 
         })
         
     }
@@ -109,7 +117,8 @@ const CuponProvider = ({children})=>{
             dia: "",
             mes: "",
             hora: "",
-            legal: ""
+            legal: "",
+            textoAlt: ""
         })
 
         setEditandoId(null)
@@ -176,6 +185,7 @@ const CuponProvider = ({children})=>{
                     llamado: div.querySelector(".Cupon_llamado")?.textContent || "",
                     subllamado: div.querySelector(".Cupon_subllamado")?.textContent || "",
                     legal: div.querySelector(".panel")?.textContent || "",
+                    textoAlt: div.querySelector("img")?.getAttribute("alt") || "", 
                     dia,
                     mes,
                     hora,

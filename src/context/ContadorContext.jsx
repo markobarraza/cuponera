@@ -5,7 +5,7 @@ export const ContadorContext = createContext()
 
 const ContadorProvider = ({children})=>{
 
-    const {image, getInformacion} = useContext(FalabellaContext)
+    const {image, textoAlt, getInformacion} = useContext(FalabellaContext)
 
     const [formulario, setFormulario] = useState(
         {
@@ -20,6 +20,7 @@ const ContadorProvider = ({children})=>{
             dcto: "",
             Precio2x: "",
             url: "",
+            textoAlt: "",
             ou: false,
             oudcto: false,
             ou2x: false,
@@ -46,14 +47,19 @@ const ContadorProvider = ({children})=>{
     // Boton agregar contador
     const agregar= async()=>{
         let imageUrl = formulario.image; //se guarda en la variable lo que se escribe en input image
+        let textoAltValue = formulario.textoAlt;
+
         if(!imageUrl && formulario.sku){ //la condicion es: si no hay info en input image y si hay info en input sku
             // Si no hay URL manual, consulta la API por SKU
-            imageUrl = await getInformacion(formulario.sku); // espera y recibe la url
-        } 
+            const { imageUrl: apiImage, textoalt } = await getInformacion(formulario.sku);
+            imageUrl = apiImage;
+            textoAltValue = textoalt || textoAltValue;
+        }
         const nuevoCupon = {
             ...formulario,
             id: Date.now(), // ID único basado en la fecha y hora actual
-            image: imageUrl || "" // usa la url recibida
+            image: imageUrl || "", // usa la url recibida
+            textoAlt: textoAltValue || "" 
         };
         
         setDatos ([...datos, nuevoCupon])
@@ -69,10 +75,10 @@ const ContadorProvider = ({children})=>{
             dcto: "",
             Precio2x: "",
             url: "",
+            textoAlt: "",
             ou: false,
             oudcto: false,
-            ouPrecioUnico: false,
-            dosPor: false,
+            ou2x: false,
             precioCheck: true,
             dctoCheck: false,
             precioUnicoCheck: false,
@@ -106,10 +112,10 @@ const ContadorProvider = ({children})=>{
             dcto: "",
             Precio2x: "",
             url: "",
+            textoAlt: "",
             ou: false,
             oudcto: false,
-            ouPrecioUnico: false,
-            dosPor: false,
+            ou2x: false,
             precioCheck: true,
             dctoCheck: false,
             precioUnicoCheck: false,
@@ -220,6 +226,7 @@ const ContadorProvider = ({children})=>{
                     id: Date.now() + Math.random(),
                     sku: "",
                     image,
+                    textoAlt: textoAltCapturado,
                     marca,
                     descripcion,
                     subllamado,
@@ -252,9 +259,10 @@ const ContadorProvider = ({children})=>{
                 dcto: "",
                 Precio2x: "",
                 url: "",
+                textoAlt: "",
                 ou: false,
                 oudcto: false,
-                ouPrecioUnico: false,
+                ou2x: false,
                 precioCheck: true,
                 dctoCheck: false,
                 precioUnicoCheck: false,

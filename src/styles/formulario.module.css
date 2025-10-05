@@ -56,9 +56,15 @@
         }
         & .inputButton{
             margin-top: 20px;
-            border: #ced4da 1px solid;
+            background-color: #bed4cf;
+            border: solid 1px #a8c0ba ;
+            padding: 8px 15px ;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #2a3d35;
             &:hover{
-                background-color: #eaedf0;
+                background-color: #a8c0ba;
             }
         }
 
@@ -69,6 +75,20 @@
             border: 1px solid #c2c2c2;
             margin: 3px 0;
             box-sizing: border-box;
+        }
+        & .inputLegal{
+                width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #c2c2c2;
+    margin: 3px 0;
+    box-sizing: border-box;
+    resize: vertical;
+    vertical-align: top;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
         }
     }
     & .btnDescargar{

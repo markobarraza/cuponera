@@ -18,7 +18,7 @@ const Cupon = ({cupon}) => {
 
               {/* IMAGEN */}
               <div className='Cupon_contenedorImage'>
-                <img className='Cupon_img' src={cupon.image} alt="" />
+                <img className='Cupon_img' src={cupon.image} alt= {`Cupón Falabella ${cupon.textoAlt}`} title={`Cupón Falabella ${cupon.textoAlt}`} />
               </div>
 
               {/* DIVISOR */}
@@ -31,7 +31,7 @@ const Cupon = ({cupon}) => {
                     <p className='Cupon_texto'>usando el cupon</p>
                     <div className='Cupon_nombreCupon'>
                       <p className='Cupon_cupon'>{cupon.cupon}</p>
-                      <img className='Cupon_iconCopiar copiarCupon' src="https://images.contentstack.io/v3/assets/blt7c5c2f2f888a7cc3/blt6d1556bf501d9da7/copy-regular-full.png" alt="" />
+                      <img className='Cupon_iconCopiar copiarCupon' src="https://images.contentstack.io/v3/assets/blt7c5c2f2f888a7cc3/blt6d1556bf501d9da7/copy-regular-full.png" alt="Tarjeta Oportunidad unica falabella" />
                       <div className="Cupon_mensajeCopiado">Copiar cupon</div>
                     </div>
                   </div>
