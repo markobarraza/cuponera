@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { ContadorContext } from '../context/ContadorContext'
 import '../styles/CardContador.css'
+import { NavLink } from 'react-router-dom'
 
 const CardContador = ({contador}) => {
   const{eliminarContador, editarContador} = useContext(ContadorContext)
@@ -26,7 +27,7 @@ const CardContador = ({contador}) => {
                         <p className='Contador_subDescripcion'>{contador.subllamado}</p>
                       </div>
     
-                      <a to="#" className='Contador_contendorllamado'>
+                      <NavLink to="#" className='Contador_contendorllamado'>
 
 
                       {/* PRECIO OU */}
@@ -96,7 +97,7 @@ const CardContador = ({contador}) => {
                         </div>
                         )}
 
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                 </div>
