@@ -189,7 +189,7 @@ const CuponProvider = ({children})=>{
                     dia,
                     mes,
                     hora,
-                    url: "", // Si tienes un campo url, ajusta aquí el selector
+                    url: div.querySelector(".Cupon_contendorllamado")?.getAttribute("href") || "", // <-- CAPTURAR URL
                     id: Date.now() + Math.random()
                 };
             });
