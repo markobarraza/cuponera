@@ -54,9 +54,9 @@ const Cupon = ({cupon}) => {
                   
                 </div>
 
-                <div className='Cupon_contenedorLegal'>
+                {/* <div className='Cupon_contenedorLegal'>
                   <p className='Cupon_textoLegal'>Válido hasta el {cupon.dia}/{cupon.mes}/2025 a las {cupon.hora}hras. </p>
-                </div>
+                </div> */}
 
               </div>
               
