@@ -27,7 +27,7 @@ const CardContador = ({contador}) => {
                         <p className='Contador_subDescripcion'>{contador.subllamado}</p>
                       </div>
     
-                      <NavLink to="#" className='Contador_contendorllamado'>
+                      <NavLink to={contador.url} className='Contador_contendorllamado'>
 
 
                       {/* PRECIO OU */}
