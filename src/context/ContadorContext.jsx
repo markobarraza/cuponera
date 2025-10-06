@@ -148,128 +148,137 @@ const ContadorProvider = ({children})=>{
 
 
     const handleUploadHTML = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const html = event.target.result;
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = html;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const html = event.target.result;
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
 
-            const cards = tempDiv.querySelectorAll('[data-contador="true"]');
+        let cards = tempDiv.querySelectorAll('[data-contador="true"]');
+        if (cards.length === 0) {
+            // fallback si el HTML viejo no tenía data-contador
+            cards = tempDiv.querySelectorAll('.Contador_contenedorPadre');
+        }
 
-            // Helper para limpiar símbolos $
-            const cleanMoney = (v) => (v || "").replace(/\$/g, "").trim();
+        // Helper para limpiar símbolos $
+        const cleanMoney = (v) => (v || "").replace(/\$/g, "").trim();
 
-            const contadores = Array.from(cards).map(div => {
-                const image = div.querySelector('.Contador_img')?.getAttribute('src') || "";
-                const marca = div.querySelector('.Contador_texto')?.textContent?.trim() || "";
-                const descripcion = div.querySelector('.Contador_descripcion')?.textContent?.trim() || "";
-                const subllamado = div.querySelector('.Contador_subDescripcion')?.textContent?.trim() || "";
+        const contadores = Array.from(cards).map(div => {
+            const image = div.querySelector('.Contador_img')?.getAttribute('src') || "";
+            const textoAltCapturado = div.querySelector('.Contador_img')?.getAttribute('alt') || ""; // <-- DEFINIR AQUÍ
+            const marca = div.querySelector('.Contador_texto')?.textContent?.trim() || "";
+            const descripcion = div.querySelector('.Contador_descripcion')?.textContent?.trim() || "";
+            const subllamado = div.querySelector('.Contador_subDescripcion')?.textContent?.trim() || "";
 
-                const bloquePrecio = div.querySelector('.contenedorRelativoPrecio');
-                const bloqueDcto = div.querySelector('.contenedorRelativo');
-                const bloque2x = bloquePrecio?.querySelector('.Contador_contenedor2xPrecio');
+            const bloquePrecio = div.querySelector('.contenedorRelativoPrecio');
+            const bloqueDcto = div.querySelector('.contenedorRelativo');
+            const bloque2x = bloquePrecio?.querySelector('.Contador_contenedor2xPrecio');
 
-                const precioUnicoCheck = !!bloque2x;
-                const precioCheck = !!bloquePrecio && !precioUnicoCheck;
-                const dctoCheck = !!bloqueDcto;
+            const precioUnicoCheck = !!bloque2x;
+            const precioCheck = !!bloquePrecio && !precioUnicoCheck;
+            const dctoCheck = !!bloqueDcto;
 
-                const ou = !!bloquePrecio?.querySelector('.imgOU_precio') && precioCheck;
-                const ouPrecioUnico = !!bloquePrecio?.querySelector('.imgOU_precio') && precioUnicoCheck;
-                const oudcto = !!bloqueDcto?.querySelector('.imgOU');
+            const ou = !!bloquePrecio?.querySelector('.imgOU_precio') && precioCheck;
+            const ouPrecioUnico = !!bloquePrecio?.querySelector('.imgOU_precio') && precioUnicoCheck;
+            const oudcto = !!bloqueDcto?.querySelector('.imgOU');
+            const dosPor = !!bloque2x?.querySelector('.Contador_texto2x'); // <-- AGREGAR esto que faltaba
 
-                let PrecioOferta = "";
-                let PrecioTMP = "";
-                let PrecioNormal = "";
-                let Precio2x = "";
-                let dcto = "";
+            let PrecioOferta = "";
+            let PrecioTMP = "";
+            let PrecioNormal = "";
+            let Precio2x = "";
+            let dcto = "";
 
-                if (precioCheck) {
-                    const precios = Array
-                      .from(bloquePrecio.querySelectorAll('.Contador_precioOferta'))
-                      .map(p => cleanMoney(p.textContent))
-                      .filter(Boolean);
+            if (precioCheck) {
+                const precios = Array
+                  .from(bloquePrecio.querySelectorAll('.Contador_precioOferta'))
+                  .map(p => cleanMoney(p.textContent))
+                  .filter(Boolean);
 
-                    if (precios[0]) PrecioOferta = precios[0];
-                    if (precios[1]) PrecioTMP = precios[1];
+                if (precios[0]) PrecioOferta = precios[0];
+                if (precios[1]) PrecioTMP = precios[1];
 
-                    const normalLine = Array
-                      .from(bloquePrecio.querySelectorAll('.Contador_TextoprecioOferta'))
-                      .map(p => p.textContent)
-                      .find(t => /P\.?\s*Normal/i.test(t));
+                const normalLine = Array
+                  .from(bloquePrecio.querySelectorAll('.Contador_TextoprecioOferta'))
+                  .map(p => p.textContent)
+                  .find(t => /P\.?\s*Normal/i.test(t));
 
-                    if (normalLine){
-                        const match = normalLine.match(/Normal:?[\s$]*([0-9.\-–_,]+)/i);
-                        if (match) PrecioNormal = cleanMoney(match[1]);
-                    }
+                if (normalLine){
+                    const match = normalLine.match(/Normal:?[\s$]*([0-9.\-–_,]+)/i);
+                    if (match) PrecioNormal = cleanMoney(match[1]);
                 }
+            }
 
-                if (precioUnicoCheck) {
-                    Precio2x = cleanMoney(
-                        bloque2x?.querySelector('.Contador_precio2x')?.textContent || ""
-                    );
-                }
+            if (precioUnicoCheck) {
+                Precio2x = cleanMoney(
+                    bloque2x?.querySelector('.Contador_precio2x')?.textContent || ""
+                );
+            }
 
-                if (dctoCheck) {
-                    dcto = bloqueDcto
-                      ?.querySelector('.Contador_porcentaje')
-                      ?.textContent
-                      ?.replace(/[^0-9]/g,'')
-                      ?.trim() || "";
-                }
+            if (dctoCheck) {
+                dcto = bloqueDcto
+                  ?.querySelector('.Contador_porcentaje')
+                  ?.textContent
+                  ?.replace(/[^0-9]/g,'')
+                  ?.trim() || "";
+            }
 
-                const url = div.querySelector('.Contador_contendorllamado')?.getAttribute('href') || "";
+            const url = div.querySelector('.Contador_contendorllamado')?.getAttribute('href') || "";
 
-                return {
-                    id: Date.now() + Math.random(),
-                    sku: "",
-                    image,
-                    textoAlt: textoAltCapturado,
-                    marca,
-                    descripcion,
-                    subllamado,
-                    PrecioOferta,
-                    PrecioTMP,
-                    PrecioNormal,
-                    Precio2x,
-                    dcto,
-                    url,
-                    ou,
-                    oudcto,
-                    ouPrecioUnico,
-                    precioCheck,
-                    dctoCheck,
-                    precioUnicoCheck,
-                };
-            });
-
-            setDatos(contadores);
-            setEditandoId(null);
-            setFormulario({
+            return {
+                id: Date.now() + Math.random(),
                 sku: "",
-                image: "",
-                marca: "",
-                descripcion: "",
-                subllamado: "",
-                PrecioOferta: "",
-                PrecioTMP: "",
-                PrecioNormal: "",
-                dcto: "",
-                Precio2x: "",
-                url: "",
-                textoAlt: "",
-                ou: false,
-                oudcto: false,
-                ou2x: false,
-                precioCheck: true,
-                dctoCheck: false,
-                precioUnicoCheck: false,
-            });
-        };
-        reader.readAsText(file);
+                image,
+                textoAlt: textoAltCapturado, // <-- AHORA SÍ ESTÁ DEFINIDO
+                marca,
+                descripcion,
+                subllamado,
+                PrecioOferta,
+                PrecioTMP,
+                PrecioNormal,
+                Precio2x,
+                dcto,
+                url,
+                ou,
+                oudcto,
+                ouPrecioUnico,
+                dosPor, // <-- AGREGAR
+                precioCheck,
+                dctoCheck,
+                precioUnicoCheck,
+            };
+        });
+
+        console.log('Contadores cargados:', contadores.length); // <-- PARA DEBUG
+
+        setDatos(contadores);
+        setEditandoId(null);
+        setFormulario({
+            sku: "",
+            image: "",
+            marca: "",
+            descripcion: "",
+            subllamado: "",
+            PrecioOferta: "",
+            PrecioTMP: "",
+            PrecioNormal: "",
+            dcto: "",
+            Precio2x: "",
+            url: "",
+            textoAlt: "",
+            ou: false,
+            oudcto: false,
+            ou2x: false,
+            precioCheck: true,
+            dctoCheck: false,
+            precioUnicoCheck: false,
+        });
     };
+    reader.readAsText(file);
+};
     
     
     return(
