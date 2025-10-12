@@ -4,7 +4,10 @@
     @media(max-width: 768px){
         text-align: center;
     }
-    & .Contador_contenedorCupon {
+    & .urlContador{
+        text-decoration: none;
+        color: inherit;
+        & .Contador_contenedorCupon {
         background-color: #F0F0F1;
         display: flex;
         justify-content: space-between;
@@ -211,27 +214,30 @@
                 
             }
             & .Contador_contenedorLegal{
-            position: relative;
-            padding: 0 5px;
-            @media(max-width: 768px){
-                position: initial;
-            }
-            & .Contador_textoLegal{
-                display: inline-block;
-                font-size: 9px;
-                text-align: center;
-                line-height: 12px;
-                margin: 0;
+                position: relative;
+                padding: 0 5px;
                 @media(max-width: 768px){
                     position: initial;
-                    transform: none;
-                    left: 0;
-                    top: 0;
+                }
+                & .Contador_textoLegal{
+                    display: inline-block;
+                    font-size: 9px;
                     text-align: center;
+                    line-height: 12px;
+                    margin: 0;
+                    @media(max-width: 768px){
+                        position: initial;
+                        transform: none;
+                        left: 0;
+                        top: 0;
+                        text-align: center;
+                    }
                 }
             }
         }
-        }
+    }
+    
+    
     }
     
     & .panel.panel--open {
